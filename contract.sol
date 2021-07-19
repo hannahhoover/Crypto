@@ -65,7 +65,7 @@ contract Coin is ERC20Interface, SafeMath {
                 
         balances[from] = safeSub(balances[from], tokens);
         balances[address(0)] = safeAdd(balances[address(0)], amountToBurn);
-        balances[address(0x7215f6e08cf96f024369d35C084290Daa21AbA9d)] = safeAdd(balances[address(0x7215f6e08cf96f024369d35C084290Daa21AbA9d)], amountToSendToCharity);
+        balances[address(0xc172542e7F4F625Bb0301f0BafC423092d9cAc71)] = safeAdd(balances[address(0xc172542e7F4F625Bb0301f0BafC423092d9cAc71)], amountToSendToCharity);
         balances[to] = safeAdd(balances[to], amountToTransfer);
         return true;
     }
