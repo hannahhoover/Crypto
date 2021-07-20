@@ -1,2 +1,2 @@
 # Crypto
-![](Untitled design.png)
+![](Untitled%20design.png)
