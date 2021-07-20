@@ -59,8 +59,8 @@ contract Coin is ERC20Interface, SafeMath {
     }
     
     function _transfer(address from, address to, uint256 tokens) private returns (bool success) {
-        uint256 amountToBurn = safeDiv(tokens, 20); // 5% of the transaction shall be burned
-        uint256 amountToSendToCharity = safeDiv(tokens, 20); // 5% of the transaction shall be sent to charity
+        uint256 amountToBurn = safeDiv(tokens, 200); // .5% of the transaction shall be burned
+        uint256 amountToSendToCharity = safeDiv(tokens, 200); // .5% of the transaction shall be sent to charity
         uint256 amountToTransfer = safeSub(safeSub(tokens, amountToBurn), amountToSendToCharity);
                 
         balances[from] = safeSub(balances[from], tokens);
