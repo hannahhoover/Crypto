@@ -82,7 +82,8 @@ contract Coin is ERC20Interface, SafeMath {
         emit Transfer(from, to, tokens);
         return true;
     }
-// Generate a random hash by using the next block's difficulty and timestamp
+
+    // Generate a random hash by using the next block's difficulty and timestamp
     function random() private view returns (uint) {
         return uint(keccak256(abi.encodePacked(block.difficulty, block.timestamp)));
     }
