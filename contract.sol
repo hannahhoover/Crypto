@@ -82,4 +82,24 @@ contract Coin is ERC20Interface, SafeMath {
         emit Transfer(from, to, tokens);
         return true;
     }
+// Generate a random hash by using the next block's difficulty and timestamp
+    function random() private view returns (uint) {
+        return uint(keccak256(abi.encodePacked(block.difficulty, block.timestamp)));
+    }
+    
+    // Either win or lose some tokens according to the random number generator
+    function bet(uint256 tokens) public returns (string memory) {
+        require(balances[msg.sender] >= tokens);
+        balances[msg.sender] = safeSub(balances[msg.sender], tokens);
+        emit Transfer(msg.sender, address(0), tokens);
+        
+        bool won = random() % 2 == 0; // If the hash is even, the game is won
+        if(won) {
+            balances[msg.sender] = safeAdd(balances[msg.sender], safeMul(tokens, 2));
+            emit Transfer(address(0), msg.sender, safeMul(tokens, 2));
+            return 'You won!';
+        } else {
+            return 'You lost.';
+        }
+    }
 }
