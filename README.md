@@ -1,4 +1,4 @@
-CPC coins are deflationary tokens deployed on the Binance Smart Chain under contract (fill in address).
+CPC coins are deflationary tokens deployed on the Binance Smart Chain under contract 0x7fdba9c4136510295E992eeb8e130AcbB661C14e.
 ![](Untitled%20design.png)
 
 Supply and Future Ambitions
@@ -17,7 +17,7 @@ Using the TrustWallet app (or any Smart Chain wallet), navigate to the DApp: Pan
 
 In the "From" field, select the token you'd like to transfer, then in the "To" field, enter the smart contract for CPC:
 
-(fill in address)
+0x7fdba9c4136510295E992eeb8e130AcbB661C14e
 If the transaction fails, be sure to incrementally increase the slippage percentage within the PancakeSwap settings. At the time of writing this, 6% is the minimum slippage for a successful transaction.
 
 How to Contribute
