@@ -33,8 +33,8 @@ contract SafeMath {
 }
 
 contract Coin is ERC20Interface, SafeMath {
-    string public name = "MyCoin";
-    string public symbol = "SIM";
+    string public name = "CrypCoin";
+    string public symbol = "CPC";
     uint8 public decimals = 18;
     uint256 public _totalSupply = 2000000000000000000000000000; // 2 billion SIM in supply
 
