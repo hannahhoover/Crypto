@@ -1,6 +1,11 @@
+/**
+ *Submitted for verification at BscScan.com on 2021-07-23
+*/
+
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.0;
 
+// Required so that the token is consistent and accessible by all exchanges
 abstract contract ERC20Interface {
     function totalSupply() public virtual view returns (uint256);
     function balanceOf(address tokenOwner) public virtual view returns (uint256 balance);
@@ -13,6 +18,7 @@ abstract contract ERC20Interface {
     event Approval(address indexed tokenOwner, address indexed spender, uint256 tokens);
 }
 
+// Ensure that the math done on quantities is secure, and the transaction is reversed if anything goes wrong
 contract SafeMath {
     function safeAdd(uint256 a, uint256 b) public pure returns (uint256 c) {
         c = a + b;
@@ -32,11 +38,12 @@ contract SafeMath {
     }
 }
 
+// The complete definition of the token
 contract Coin is ERC20Interface, SafeMath {
     string public name = "CrypCoin";
     string public symbol = "CPC";
     uint8 public decimals = 18;
-    uint256 public _totalSupply = 2000000000000000000000000000; // 2 billion SIM in supply
+    uint256 public _totalSupply = 2000000000000000000000000000; // 2 billion tokens in supply
 
     mapping(address => uint256) balances;
     mapping(address => mapping(address => uint256)) allowed;
@@ -65,8 +72,18 @@ contract Coin is ERC20Interface, SafeMath {
                 
         balances[from] = safeSub(balances[from], tokens);
         balances[address(0)] = safeAdd(balances[address(0)], amountToBurn);
+        // This address belongs to the AmwFund charity (https://giveth.io/project/AmwFund)
         balances[address(0xc172542e7F4F625Bb0301f0BafC423092d9cAc71)] = safeAdd(balances[address(0xc172542e7F4F625Bb0301f0BafC423092d9cAc71)], amountToSendToCharity);
         balances[to] = safeAdd(balances[to], amountToTransfer);
+        
+        emit Transfer(from, address(0), amountToBurn);
+        emit Transfer(from, address(0xc172542e7F4F625Bb0301f0BafC423092d9cAc71), amountToSendToCharity);
+        emit Transfer(from, to, amountToTransfer);
+        return true;
+    }
+    
+    function transfer(address to, uint256 tokens) public override returns (bool success) {
+        _transfer(msg.sender, to, tokens);
         return true;
     }
 
